@@ -5,4 +5,4 @@ export function openedPopup(popup) {
 /* Функция закрытия модального окна */
 export function closePopup(overt) {
   overt.classList.remove('popup_is-opened');
-}
+};
