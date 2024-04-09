@@ -107,7 +107,6 @@ function openImage(evt, card) {
     popupImage.src = card.link;
     popupImage.alt = card.name;
     popupCaption.textContent = card.name;
-    popupTypeImg.classList.add('popup_dark');
     openPopup(popupTypeImg);
   };
 };
@@ -119,12 +118,6 @@ exitTypeImg.addEventListener('click', function () {
 /* Закрытие окна просмотра карточки при нажатии на оверлей */
 popupTypeImg.addEventListener('click', (evt) => {
   if (evt.currentTarget === evt.target) {
-    closePopup(popupTypeImg);
-  };
-});
-/* Закрытие окна просмотра картинок при нажатии на ESC */
-window.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
     closePopup(popupTypeImg);
   };
 });
