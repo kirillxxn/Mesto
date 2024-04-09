@@ -5,3 +5,6 @@
   pointer-events: all;
   transition: visibility 0s, opacity 0.6s;
 }
+.popup_dark{
+  background-color: rgba(0, 0, 0, 0.9);
+}

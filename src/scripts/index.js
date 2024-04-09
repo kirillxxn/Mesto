@@ -1,13 +1,13 @@
 import '../pages/index.css';
 import {
-  openedPopup,
+  openPopup,
   closePopup
 } from './modal.js';
 import {
   initialCards
 } from './cards.js';
 import {
-  cardAndDelete,
+  createCard,
   likeCard,
   deleteCard
 } from './card.js';
@@ -20,9 +20,9 @@ const editProfile = document.querySelector('.popup_type_edit');
 const exitEditProfile = editProfile.querySelector('.popup__close');
 const profileInfo = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const formElement = document.querySelector('.popup__form')
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_description');
+const profileForm = document.forms["edit-profile"];
+const nameInput = profileForm.querySelector('.popup__input_type_name');
+const jobInput = profileForm.querySelector('.popup__input_type_description');
 const buttonAddImage = document.querySelector('.profile__add-button');
 const newCard = document.querySelector('.popup_type_new-card');
 const exitNewCard = newCard.querySelector('.popup__close');
@@ -43,28 +43,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // @todo: Добавление карточeк на страницу
 function addCard(card) { // Функция добавления карточек
-  placeList.append(cardAndDelete(card, deleteCard, likeCard, openImage));
+  placeList.append(createCard(card, deleteCard, likeCard, openImage));
 };
 // @todo: Вывести карточки на страницу
-initialCards.forEach((card) => {
-  addCard(card);
-});
+initialCards.forEach(addCard);
 
 /* Клик по кнопке редактировать профиль  */
 buttonEditProfile.addEventListener('click', function () {
-  openedPopup(editProfile);
+  openPopup(editProfile);
   nameInput.value = profileInfo.textContent;
   jobInput.value = profileDescription.textContent;
 });
 
 /* Функция обработчика заполнения формы профиля */
-function handleFormSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileInfo.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
   closePopup(editProfile);
 };
-formElement.addEventListener('submit', handleFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 /* Клик по крестику выхода из модального окна редактирования профиля */
 exitEditProfile.addEventListener('click', function () {
   closePopup(editProfile);
@@ -75,17 +73,9 @@ editProfile.addEventListener("click", (evt) => {
     closePopup(editProfile);
   };
 });
-/* Закрытие окна редактирования профиля при нажатии на ESC */
-window.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(editProfile);
-  }
-});
-
-
 /* Клик по кнопке добавления фото */
 buttonAddImage.addEventListener('click', function () {
-  openedPopup(newCard);
+  openPopup(newCard);
 });
 
 /* Функция добавления новой карточки */
@@ -95,7 +85,7 @@ formPlace.addEventListener("submit", function (evt) {
     link: urlInput.value,
     name: placeInput.value,
   };
-  placeList.prepend(cardAndDelete(card, deleteCard, likeCard));
+  placeList.prepend(createCard(card, deleteCard, likeCard, openImage));
   formPlace.reset();
   closePopup(newCard);
 });
@@ -111,20 +101,14 @@ newCard.addEventListener("click", (evt) => {
   };
 });
 
-/* Закрытие окна добавления карточек при нажатии на ESC */
-window.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
-    closePopup(newCard);
-  }
-});
 /* Функция открытия карточки */
 function openImage(evt, card) {
   if (!evt.target.classList.contains('card__delete-button')) {
     popupImage.src = card.link;
     popupImage.alt = card.name;
     popupCaption.textContent = card.name;
-    popupTypeImg.style.background = "rgba(0, 0, 0, 0.9)";
-    openedPopup(popupTypeImg);
+    popupTypeImg.classList.add('popup_dark');
+    openPopup(popupTypeImg);
   };
 };
 
