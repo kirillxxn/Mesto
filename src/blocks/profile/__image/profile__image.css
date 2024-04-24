@@ -20,3 +20,25 @@
     margin-right: 0;
   }
 }
+.profile__image_section{
+  display: flex;
+ position: relative;
+}
+.profile_edit_avatar{
+  background: none;
+  border: none;
+  border-radius: 50%;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 0;
+}
+.profile_edit_avatar:hover{
+background-image: url(/src/images/edit-icon.svg);
+background-repeat: no-repeat;
+background-position: center;
+background-size: 23%;
+cursor: pointer;
+background-color: black;
+opacity: 0.7;
+}

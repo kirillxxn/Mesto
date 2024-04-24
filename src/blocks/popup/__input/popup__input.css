@@ -7,7 +7,8 @@
   line-height: 18px;
   box-sizing: border-box;
   padding: 10px 0 0;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
+  outline: none;
 }
 
 .popup__input:last-of-type {
@@ -19,4 +20,12 @@
     font-size: 12px;
     line-height: 15px;
   }
+}
+.popup__input_type_error {
+  border-bottom-color: red;
+} 
+.form__input-error{
+  font-size: 12px;
+  color: red;
+  margin-top: 120px;
 }
