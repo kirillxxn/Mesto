@@ -31,7 +31,7 @@ const showInputError = (
     validationConfig
   ) => {
     if (hasInvalidInput(inputList)) {
-      submitButtonDisable(buttonElement, validationConfig);
+      disableSubmitButton(buttonElement, validationConfig);
     } else {
       buttonElement.disabled = false;
       buttonElement.classList.remove(validationConfig.inactiveButtonClass);
@@ -94,10 +94,10 @@ const showInputError = (
     inputElements.forEach((inputElement) => {
       hideInputError(formElement, inputElement, validationConfig);
     });
-    submitButtonDisable(buttonElement, validationConfig);
+    disableSubmitButton(buttonElement, validationConfig);
   }
   
-  const submitButtonDisable = (button, config) => {
+  const disableSubmitButton = (button, config) => {
     button.disabled = true;
     button.classList.add(config.inactiveButtonClass);
   };

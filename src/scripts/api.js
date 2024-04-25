@@ -18,14 +18,8 @@ export function getUserInfo() {
   return fetch(`${config.baseUrl}/users/me`, {
       method: 'GET',
       headers: config.headers,
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка при запросе данных пользователя: ${res.status}`
-      );
+    }).then((res) => {
+      return errorResponse(res, "Ошибка при запросе данных пользователя");
     });
 };
 
@@ -33,14 +27,8 @@ export function getUserInfo() {
 export function getCardInfo() {
   return fetch(`${config.baseUrl}/cards`, {
       headers: config.headers,
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка при получении карточек: ${res.status}`
-      );
+    }).then((res) => {
+      return errorResponse(res, "Ошибка при получении карточек");
     });
 };
 /* Редактирование профиля */
@@ -52,14 +40,8 @@ export function getEditUser(name, about) {
         name: name,
         about: about,
       }),
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка при редактровании данных пользователя: ${res.status}`
-      );
+    }).then((res) => {
+      return errorResponse(res, "Ошибка при редактровании данных пользователя");
     });
 };
 /* Добавление новых карточек */
@@ -71,13 +53,8 @@ export function getAddCard(name, link) {
         name: name,
         link: link
       }),
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(
-        `Ошибка при добавлении карточки: ${res.status}`);
+    }).then((res) => {
+      return errorResponse(res, "Ошибка при добавлении карточки");
     });
 };
 

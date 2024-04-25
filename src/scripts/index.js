@@ -82,11 +82,13 @@ function handleSubmitFormProfile(evt) {
       profileInfo.textContent = user.name;
       profileDescription.textContent = user.about;
       closePopup(editProfile);
-      loadingButtonSave(false, buttonSaveEditProfile);
     })
     .catch((err) => {
       console.log('Ошибка при редактировании профиля:' + ' ' + err);
     })
+    .finally(() => {
+      loadingButtonSave(false, buttonSaveEditProfile);
+    });
 };
 /* Слушатель для кнопки сохранить в модальном окне редактирования профиля */
 profileForm.addEventListener('submit', handleSubmitFormProfile);
@@ -123,12 +125,14 @@ function handleSubmitFormAvatar(evt) {
     .then((photo) => {
       profileImage.src = photo.avatar;
       closePopup(editAvatar);
-      loadingSave(false, buttonEditAvatar);
       editAvatarForm.reset();
     })
     .catch((err) => {
       console.log('Ошибка при обновлении аватара:' + err);
     })
+    .finally(() => {
+      loadingButtonSave(false, buttonSaveEditProfile);
+    });
 };
 /* Слушатель для кнопки сохранить в модальном окне редактирования аватара */
 editAvatarForm.addEventListener('submit', handleSubmitFormAvatar);
@@ -152,14 +156,18 @@ formPlace.addEventListener('submit', function (evt) {
   loadingButtonSave(true, buttonSaveAddCard);
   getAddCard(evt.target.place.value, evt.target.link.value)
     .then((card) => {
-      placeList.prepend(createCard(card, deleteCard, likeCard, openImage));
-      loadingButtonSave(false, buttonSaveAddCard);
+      placeList.prepend(createCard(card,card.owner._id, deleteCard, likeCard, openImage));
     })
+
     .catch((err) => {
       console.log('Ошибка при добавлении карточки' + ' ' + err);
+    })
+    .finally(() => {
+      loadingButtonSave(false, buttonSaveEditProfile);
+      formPlace.reset();
+      closePopup(newCard) 
     });
-  formPlace.reset();
-  closePopup(newCard);
+ 
 
 });
 /* Клик по крестику выхода из модального окна добавления карточки */
@@ -176,13 +184,12 @@ newCard.addEventListener('click', (evt) => {
 
 /* Функция открытия карточки */
 function openImage(evt, card) {
-  if (!evt.target.classList.contains('card__delete-button')) {
     popupImage.src = card.link;
     popupImage.alt = card.name;
     popupCaption.textContent = card.name;
     openPopup(popupTypeImg);
   };
-};
+
 
 /* Клик по крестику выхода из окна просмотра картинки */
 exitTypeImg.addEventListener('click', function () {
