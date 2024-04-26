@@ -11,7 +11,7 @@ _____
 _____
 Третий этап работы - написан код для валидации форм, сделана интеграция с API, проект подключен в серверу. 
 _____
-[![](https://imageup.ru/img71/4750647/snimok-ekrana-2024-02-29-005236.jpg)](https://imageup.ru/img71/4750647/snimok-ekrana-2024-02-29-005236.jpg.html)
+[![](https://imageup.ru/img53/4810985/snimok-ekrana-2024-04-26-140418.jpg)](https://imageup.ru/img53/4810985/snimok-ekrana-2024-04-26-140418.jpg.html)
 _____
 [![](https://imageup.ru/img229/4810982/snimok-ekrana-2024-04-26-135602.jpg)](https://imageup.ru/img229/4810982/snimok-ekrana-2024-04-26-135602.jpg.html)
 _____
